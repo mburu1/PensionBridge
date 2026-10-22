@@ -18,5 +18,38 @@ services:
       timeout: 5s
       retries: 5
 
+  api:
+    build:
+      context: .
+      dockerfile: src/PensionBridge.Api/Dockerfile
+    container_name: pensionbridge-api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:5000
+      - ConnectionStrings__PensionBridge=Host=postgres;Port=5432;Database=PensionBridge;Username=postgres;Password=YourStrong@Passw0rd
+    ports:
+      - "5000:5000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - pensionbridge-network
+
+  ui:
+    build:
+      context: ./src/PensionBridge.UI
+      dockerfile: Dockerfile
+    container_name: pensionbridge-ui
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+    networks:
+      - pensionbridge-network
+
 volumes:
   postgres_data:
+
+networks:
+  pensionbridge-network:
+    driver: bridge
