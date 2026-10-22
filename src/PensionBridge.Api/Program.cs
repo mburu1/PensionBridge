@@ -1,5 +1,8 @@
 using Serilog;
 using PensionBridge.Infrastructure.Persistence;
+using PensionBridge.Infrastructure.Ingestion;
+using PensionBridge.Application.Schemes;
+using PensionBridge.Application.Ingestion;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -24,6 +27,10 @@ try
 
     // Add persistence
     builder.Services.AddPersistence(builder.Configuration);
+
+    // Add application services
+    builder.Services.AddScoped<ISchemeService, SchemeService>();
+    builder.Services.AddScoped<IContributionIngestionService, ContributionIngestionService>();
 
     var app = builder.Build();
 

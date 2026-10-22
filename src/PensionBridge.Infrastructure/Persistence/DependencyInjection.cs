@@ -1,6 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PensionBridge.Application.Abstractions;
+using PensionBridge.Domain.Schemes;
+using PensionBridge.Domain.Employers;
+using PensionBridge.Domain.Members;
+using PensionBridge.Domain.Batches;
+using PensionBridge.Domain.Contributions;
+using PensionBridge.Domain.Audit;
+using PensionBridge.Infrastructure.Persistence.Implementations;
 
 namespace PensionBridge.Infrastructure.Persistence;
 
@@ -19,6 +27,14 @@ public static class DependencyInjection
         {
             options.UseSqlServer(connectionString);
         });
+
+        // Register repositories
+        services.AddScoped<IRepository<Scheme>, Repository<Scheme>>();
+        services.AddScoped<IRepository<Employer>, Repository<Employer>>();
+        services.AddScoped<IRepository<Member>, Repository<Member>>();
+        services.AddScoped<IRepository<ContributionBatch>, Repository<ContributionBatch>>();
+        services.AddScoped<IRepository<ContributionLine>, Repository<ContributionLine>>();
+        services.AddScoped<IRepository<AuditRecord>, Repository<AuditRecord>>();
 
         return services;
     }

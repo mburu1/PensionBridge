@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <ProjectReference Include="..\PensionBridge.Domain\PensionBridge.Domain.csproj" />
     <ProjectReference Include="..\PensionBridge.Contracts\PensionBridge.Contracts.csproj" />
   </ItemGroup>
 
