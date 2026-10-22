@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/PensionBridge.Api/PensionBridge.Api.csproj" />
+    <Project Path="src/PensionBridge.Application/PensionBridge.Application.csproj" />
+    <Project Path="src/PensionBridge.Contracts/PensionBridge.Contracts.csproj" />
+    <Project Path="src/PensionBridge.Domain/PensionBridge.Domain.csproj" />
+    <Project Path="src/PensionBridge.Infrastructure/PensionBridge.Infrastructure.csproj" />
+    <Project Path="src/PensionBridge.MigrationCli/PensionBridge.MigrationCli.csproj" />
+    <Project Path="src/PensionBridge.Worker/PensionBridge.Worker.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/PensionBridge.Architecture.Tests/PensionBridge.Architecture.Tests.csproj" />
+    <Project Path="tests/PensionBridge.Domain.Tests/PensionBridge.Domain.Tests.csproj" />
+    <Project Path="tests/PensionBridge.Integration.Tests/PensionBridge.Integration.Tests.csproj" />
+  </Folder>
+</Solution>

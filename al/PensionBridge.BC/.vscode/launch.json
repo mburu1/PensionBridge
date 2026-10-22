@@ -1,0 +1,35 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "al",
+      "request": "launch",
+      "name": "Launch: Sandbox (Cloud)",
+      "environmentType": "Sandbox",
+      "environmentName": "Sandbox",
+      "startupObjectId": 0,
+      "breakOnNext": "WebClient",
+      "launchBrowser": true,
+      "enableLongRunningSqlStatements": true,
+      "enableBreakpointDebugging": true,
+      "tenant": "your-tenant-id",
+      "schemaUpdateMode": "ForceSync"
+    },
+    {
+      "type": "al",
+      "request": "launch",
+      "name": "Launch: Container",
+      "environmentType": "OnPrem",
+      "environmentName": "Docker",
+      "startupObjectId": 0,
+      "breakOnNext": "WebClient",
+      "launchBrowser": true,
+      "enableLongRunningSqlStatements": true,
+      "enableBreakpointDebugging": true,
+      "server": "localhost",
+      "port": 7049,
+      "authentication": "UserPassword",
+      "schemaUpdateMode": "ForceSync"
+    }
+  ]
+}
