@@ -1,8 +1,12 @@
 using Serilog;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using PensionBridge.Infrastructure.Persistence;
 using PensionBridge.Infrastructure.Ingestion;
+using PensionBridge.Infrastructure.BusinessCentral;
 using PensionBridge.Application.Schemes;
 using PensionBridge.Application.Ingestion;
+using PensionBridge.Application.Reconciliation;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -17,40 +21,48 @@ try
 
     builder.Host.UseSerilog();
 
-    // Add services to the container
     builder.Services.AddOpenApi();
-
     builder.Services.AddEndpointsApiExplorer();
-
     builder.Services.AddControllers();
     builder.Services.AddProblemDetails();
-
-    // Add persistence
     builder.Services.AddPersistence(builder.Configuration);
-
-    // Add application services
     builder.Services.AddScoped<ISchemeService, SchemeService>();
     builder.Services.AddScoped<IContributionIngestionService, ContributionIngestionService>();
+    builder.Services.AddScoped<IReconciliationService, ReconciliationService>();
+    builder.Services.AddHttpClient<IBusinessCentralClient, BusinessCentralClient>();
+    builder.Services.Configure<BusinessCentralOptions>(builder.Configuration.GetSection("BusinessCentral"));
+
+    builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(options =>
+        {
+            options.Authority = builder.Configuration["Authentication:Authority"];
+            options.Audience = builder.Configuration["Authentication:Audience"];
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true
+            };
+        });
+
+    builder.Services.AddAuthorization();
 
     var app = builder.Build();
 
-    // Configure the HTTP request pipeline
     app.UseSerilogRequestLogging();
+    app.UseAuthentication();
+    app.UseAuthorization();
+    app.UseHttpsRedirection();
+    app.UseExceptionHandler();
+    app.UseStatusCodePages();
 
     if (app.Environment.IsDevelopment())
     {
         app.MapOpenApi();
     }
 
-    app.UseHttpsRedirection();
-
-    app.UseExceptionHandler();
-    app.UseStatusCodePages();
-
-    // Health endpoints
     app.MapGet("/health/live", () => Results.Ok(new { status = "healthy" }));
     app.MapGet("/health/ready", () => Results.Ok(new { status = "ready" }));
-
     app.MapControllers();
 
     Log.Information("PensionBridge API started successfully");

@@ -5,6 +5,9 @@ using PensionBridge.Domain.Members;
 using PensionBridge.Domain.Batches;
 using PensionBridge.Domain.Contributions;
 using PensionBridge.Domain.Audit;
+using PensionBridge.Domain.Reconciliation;
+using PensionBridge.Domain.Exceptions;
+using PensionBridge.Domain.Posting;
 
 namespace PensionBridge.Infrastructure.Persistence;
 
@@ -21,12 +24,13 @@ public class PensionBridgeDbContext : DbContext
     public DbSet<ContributionBatch> ContributionBatches => Set<ContributionBatch>();
     public DbSet<ContributionLine> ContributionLines => Set<ContributionLine>();
     public DbSet<AuditRecord> AuditRecords => Set<AuditRecord>();
+    public DbSet<ReconciliationResult> ReconciliationResults => Set<ReconciliationResult>();
+    public DbSet<ExceptionCase> ExceptionCases => Set<ExceptionCase>();
+    public DbSet<OutboxMessage> OutboxMessages => Set<OutboxMessage>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-
-        // Apply configurations from the assembly
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(PensionBridgeDbContext).Assembly);
     }
 }
