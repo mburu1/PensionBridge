@@ -1,0 +1,60 @@
+.batches-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h1 {
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.table-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.batches-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.batches-table th,
+.batches-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.batches-table th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+}
+
+.batches-table tr:hover {
+  background: #f8f9fa;
+}
+
+.status-received,
+.status-validating,
+.status-pending {
+  color: #ffc107;
+}
+
+.status-approved,
+.status-readyforapproval {
+  color: #28a745;
+}
+
+.status-posted {
+  color: #007bff;
+}
+
+.status-rejected,
+.status-failed {
+  color: #dc3545;
+}

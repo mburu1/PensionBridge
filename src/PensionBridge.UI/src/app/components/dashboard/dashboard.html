@@ -1,0 +1,28 @@
+<div class="dashboard-container">
+  <h1>PensionBridge Dashboard</h1>
+  
+  <div class="stats-grid">
+    <div class="stat-card">
+      <h3>Total Batches</h3>
+      <p class="stat-value">{{ totalBatches }}</p>
+    </div>
+    <div class="stat-card">
+      <h3>Pending</h3>
+      <p class="stat-value">{{ pendingBatches }}</p>
+    </div>
+    <div class="stat-card">
+      <h3>Approved</h3>
+      <p class="stat-value">{{ approvedBatches }}</p>
+    </div>
+    <div class="stat-card">
+      <h3>Posted</h3>
+      <p class="stat-value">{{ postedBatches }}</p>
+    </div>
+  </div>
+
+  <div class="quick-actions">
+    <button routerLink="/upload" class="btn btn-primary">Upload Contribution File</button>
+    <button routerLink="/batches" class="btn btn-secondary">View Batches</button>
+    <button routerLink="/schemes" class="btn btn-secondary">Manage Schemes</button>
+  </div>
+</div>

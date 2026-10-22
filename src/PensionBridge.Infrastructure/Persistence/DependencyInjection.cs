@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Npgsql;
 using PensionBridge.Application.Abstractions;
 using PensionBridge.Domain.Schemes;
 using PensionBridge.Domain.Employers;
@@ -28,7 +29,7 @@ public static class DependencyInjection
 
         services.AddDbContext<PensionBridgeDbContext>(options =>
         {
-            options.UseSqlServer(connectionString);
+            options.UseNpgsql(connectionString);
         });
 
         services.AddScoped<IRepository<Scheme>, Repository<Scheme>>();

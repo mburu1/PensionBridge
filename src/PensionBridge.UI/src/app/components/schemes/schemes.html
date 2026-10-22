@@ -1,0 +1,30 @@
+<div class="schemes-container">
+  <h1>Pension Schemes</h1>
+  
+  <div class="table-container">
+    <table class="schemes-table">
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Name</th>
+          <th>Company</th>
+          <th>Currency</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (scheme of schemes; track scheme.id) {
+          <tr>
+            <td>{{ scheme.code }}</td>
+            <td>{{ scheme.name }}</td>
+            <td>{{ scheme.businessCentralCompany }}</td>
+            <td>{{ scheme.currency }}</td>
+            <td><span [class]="'status-' + scheme.status.toLowerCase()">{{ scheme.status }}</span></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  
+  <button routerLink="/" class="btn btn-secondary">Back to Dashboard</button>
+</div>

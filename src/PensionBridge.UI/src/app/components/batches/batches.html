@@ -1,0 +1,36 @@
+<div class="batches-container">
+  <h1>Contribution Batches</h1>
+  
+  <div class="table-container">
+    <table class="batches-table">
+      <thead>
+        <tr>
+          <th>Period</th>
+          <th>File Name</th>
+          <th>Status</th>
+          <th>Total Rows</th>
+          <th>Accepted</th>
+          <th>Rejected</th>
+          <th>Total Amount</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (batch of batches; track batch.id) {
+          <tr>
+            <td>{{ batch.period }}</td>
+            <td>{{ batch.fileName }}</td>
+            <td><span [class]="'status-' + batch.status.toLowerCase()">{{ batch.status }}</span></td>
+            <td>{{ batch.totalRows }}</td>
+            <td>{{ batch.acceptedRows }}</td>
+            <td>{{ batch.rejectedRows }}</td>
+            <td>${{ batch.totalAmount }}</td>
+            <td>{{ formatDate(batch.createdAt) }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  
+  <button routerLink="/" class="btn btn-secondary">Back to Dashboard</button>
+</div>
